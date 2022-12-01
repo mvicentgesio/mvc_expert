@@ -17,8 +17,8 @@ class Router
 
         $this->controller = $this->controller . "Controller";
 
-        $this->checkController();
-
+        !file_exists(__DIR__.'/controllers/'.$this->controller.'.php') ? $this->redirect() : "";
+        
         require_once(__DIR__.'/controllers/'.$this->controller.'.php');
     }
     
@@ -26,18 +26,18 @@ class Router
     {
         $controller = new $this->controller();
         $method = $this->method;
+
+        !method_exists($controller, $method) ? $this->redirect() : "";
+
         $controller->$method();
     }
 
-    public function checkController()
+    public function redirect()
     {
-        if(!file_exists(__DIR__.'/controllers/'.$this->controller.'.php'))
-        {
-            $url = explode('/', URL);
-            $section = explode('/',$_SERVER['REQUEST_URI'])[1];
-            $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME']."/".$section."/";
-            
-            header('Location: '.$url);
-        }
+        $url = explode('/', URL);
+        $section = explode('/',$_SERVER['REQUEST_URI'])[1];
+        $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME']."/".$section."/";
+                    
+        header('Location: '.$url);
     }
 }

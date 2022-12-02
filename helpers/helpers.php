@@ -2,7 +2,10 @@
 class Render
 {
     static function view( $filePath, $variables = [], $print = true )
-    {
+    {   
+        $variables["css_path"] = CSS_FILE;
+        $variables["js_path"] = JS_FILE;
+
         $output = NULL;
 
         $filePath = ROOT.FOLDER_PATH."/views/".$filePath."/".$filePath.".php";

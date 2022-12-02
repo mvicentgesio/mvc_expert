@@ -9,3 +9,6 @@
     define('TITLE_PAGE', "Prueba");
     define('ROOT',$_SERVER['DOCUMENT_ROOT'] );
     define('FOLDER_PATH',$folder_path);
+    define('CSS_FILE', FOLDER_PATH."/public/css/styles.css");
+    define('JS_FILE',FOLDER_PATH."/public/js/main.js");
+    
